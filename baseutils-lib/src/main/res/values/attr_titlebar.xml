@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBar">
+        <!--是否显示左边的图片，如返回-->
+        <attr name="show_left_img" format="boolean" />
+        <!--中间标题属性-->
+        <attr name="ttle_text" format="string|reference" />
+        <attr name="ttle_text_color" format="string|reference" />
+        <attr name="ttle_text_size" format="string|reference" />
+        <!--右边图片属性-->
+        <attr name="right_img_src" format="reference" />
+        <!--右边文本属性-->
+        <attr name="right_tv_text" format="string|reference" />
+        <attr name="right_tv_color" format="string|reference" />
+        <attr name="right_tv_size" format="string|reference" />
+    </declare-styleable>
+</resources>

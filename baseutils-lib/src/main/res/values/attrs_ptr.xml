@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PtrFrameLayout">
+        <!-- 设置头部和内容 resId -->
+        <attr name="ptr_header" format="reference" />
+        <attr name="ptr_content" format="reference" />
+
+        <!-- 阻尼系数，默认1.7f ，越大，感觉下拉时越吃力。 -->
+        <attr name="ptr_resistance" format="float" />
+
+        <!-- 触发刷新时移动的位置比例，默认1.2f，移动达到头部高度 1.2 倍时可触发刷新操作。 -->
+        <attr name="ptr_ratio_of_header_height_to_refresh" format="float" />
+        <!--回弹延时，默认 200ms ，回弹到刷新高度所用时间。-->
+        <attr name="ptr_duration_to_close" format="integer" />
+        <!--头部回弹时间，默认 1000ms-->
+        <attr name="ptr_duration_to_close_header" format="integer" />
+
+        <!-- 刷新是否保持头部，默认值 true -->
+        <attr name="ptr_pull_to_fresh" format="boolean" />
+
+        <!-- 下拉刷新 / 释放刷新，默认为释放刷新-->
+        <attr name="ptr_keep_header_when_refresh" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PtrClassicHeader">
+        <attr name="ptr_rotate_ani_time" format="integer" />
+    </declare-styleable>
+</resources>
