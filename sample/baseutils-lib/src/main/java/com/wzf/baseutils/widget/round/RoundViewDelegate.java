@@ -2,14 +2,18 @@ package com.wzf.baseutils.widget.round;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wzf.baseutils.R;
@@ -25,12 +29,19 @@ import com.wzf.baseutils.R;
  */
 public class RoundViewDelegate {
 
+    // 无效属性
+    public static final int INVALIABLE_VALUE = Integer.MAX_VALUE;
+
     private Context context;
     private View view;
 
     private GradientDrawable gdBackGround = new GradientDrawable();
     private GradientDrawable gdPressBackGround = new GradientDrawable();
+    private BitmapDrawable bdSrc;
+    private BitmapDrawable bdSrcPress;
 
+    private int src;
+    private int srcPress;
     private int backgroundColor;
     private int backgroundPressColor;
     private int cornerRadius;
@@ -54,13 +65,15 @@ public class RoundViewDelegate {
 
     private void obtainStyledAttributes(AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.RoundTextView);
+        src = ta.getResourceId(R.styleable.RoundTextView_rv_src, INVALIABLE_VALUE);
+        srcPress = ta.getResourceId(R.styleable.RoundTextView_rv_srcPress, INVALIABLE_VALUE);
         backgroundColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundColor, Color.TRANSPARENT);
-        backgroundPressColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundPressColor, Integer.MAX_VALUE);
+        backgroundPressColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundPressColor, INVALIABLE_VALUE);
         cornerRadius = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius, 0);
         strokeWidth = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_strokeWidth, 0);
         strokeColor = ta.getColor(R.styleable.RoundTextView_rv_strokeColor, Color.TRANSPARENT);
-        strokePressColor = ta.getColor(R.styleable.RoundTextView_rv_strokePressColor, Integer.MAX_VALUE);
-        textPressColor = ta.getColor(R.styleable.RoundTextView_rv_textPressColor, Integer.MAX_VALUE);
+        strokePressColor = ta.getColor(R.styleable.RoundTextView_rv_strokePressColor, INVALIABLE_VALUE);
+        textPressColor = ta.getColor(R.styleable.RoundTextView_rv_textPressColor, INVALIABLE_VALUE);
         isRadiusHalfHeight = ta.getBoolean(R.styleable.RoundTextView_rv_isRadiusHalfHeight, false);
         isWidthHeightEqual = ta.getBoolean(R.styleable.RoundTextView_rv_isWidthHeightEqual, false);
         cornerRadius_TL = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_TL, 0);
@@ -69,6 +82,22 @@ public class RoundViewDelegate {
         cornerRadius_BR = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BR, 0);
         isRippleEnable = ta.getBoolean(R.styleable.RoundTextView_rv_isRippleEnable, true);
         ta.recycle();
+    }
+
+    public int getSrc() {
+        return src;
+    }
+
+    public void setSrc(int src) {
+        this.src = src;
+    }
+
+    public int getSrcPress() {
+        return srcPress;
+    }
+
+    public void setSrcPress(int srcPress) {
+        this.srcPress = srcPress;
     }
 
     public int getBackgroundColor() {
@@ -197,6 +226,20 @@ public class RoundViewDelegate {
     }
 
     public void setBackGroundSelector() {
+//        if (view instanceof ImageView) {
+//            StateListDrawable listDrawable = new StateListDrawable();
+//            Resources resources = view.getResources();
+//            if (src != INVALIABLE_VALUE) {
+//                bdSrc = new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, src));
+//                listDrawable.addState(new int[]{-android.R.attr.state_pressed}, bdSrc);
+//            }
+//            if (srcPress != INVALIABLE_VALUE) {
+//                bdSrcPress = new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, srcPress));
+//                listDrawable.addState(new int[]{android.R.attr.state_pressed}, bdSrcPress);
+//            }
+//            if (listDrawable.isStateful())
+//                ((ImageView) view).setImageDrawable(listDrawable);
+//        } else {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isRippleEnable) {
             setCornerAndStroke(gdBackGround, backgroundColor, strokeColor);
             RippleDrawable rippleDrawable = new RippleDrawable(getColorStateList(backgroundColor, backgroundPressColor),
@@ -206,10 +249,10 @@ public class RoundViewDelegate {
             StateListDrawable bg = new StateListDrawable();
             setCornerAndStroke(gdBackGround, backgroundColor, strokeColor);
             bg.addState(new int[]{-android.R.attr.state_pressed}, gdBackGround);
-            if (backgroundPressColor != Integer.MAX_VALUE || strokePressColor != Integer.MAX_VALUE) {
+            if (backgroundPressColor != INVALIABLE_VALUE || strokePressColor != INVALIABLE_VALUE) {
                 setCornerAndStroke(gdPressBackGround,
-                        backgroundPressColor != Integer.MAX_VALUE ? backgroundPressColor : backgroundColor,
-                        strokePressColor != Integer.MAX_VALUE ? strokePressColor : strokeColor);
+                        backgroundPressColor != INVALIABLE_VALUE ? backgroundPressColor : backgroundColor,
+                        strokePressColor != INVALIABLE_VALUE ? strokePressColor : strokeColor);
                 bg.addState(new int[]{android.R.attr.state_pressed}, gdPressBackGround);
             }
 
@@ -219,13 +262,14 @@ public class RoundViewDelegate {
                 view.setBackgroundDrawable(bg);
             }
         }
-        if (view instanceof TextView && textPressColor != Integer.MAX_VALUE) {
+        if (view instanceof TextView && textPressColor != INVALIABLE_VALUE) {
             ColorStateList textColors = ((TextView) view).getTextColors();
             int[][] states = new int[][]{new int[]{-android.R.attr.state_pressed}, new int[]{android.R.attr.state_pressed}};
             ColorStateList colorStateList = new ColorStateList(states, new int[]{textColors.getDefaultColor(), textPressColor});
             ((TextView) view).setTextColor(colorStateList);
         }
     }
+//    }
 
     private void setCornerAndStroke(GradientDrawable gd, int color, int strokeColor) {
         gd.setColor(color);
