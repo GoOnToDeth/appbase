@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 圆角ImageView src属性 -->
-    <attr name="rv_src" format="reference" />
     <!-- 圆角ImageView 按下状态src属性 -->
     <attr name="rv_srcPress" format="reference" />
     <!-- 圆角矩形背景色 -->
@@ -34,7 +32,6 @@
     <attr name="rv_isRippleEnable" format="boolean" />
 
     <declare-styleable name="RoundImageView">
-        <attr name="rv_src" />
         <attr name="rv_srcPress" />
         <attr name="rv_cornerRadius" />
         <attr name="rv_strokeWidth" />
@@ -49,7 +46,6 @@
     </declare-styleable>
 
     <declare-styleable name="RoundTextView">
-        <attr name="rv_src" />
         <attr name="rv_srcPress" />
         <attr name="rv_backgroundColor" />
         <attr name="rv_backgroundPressColor" />

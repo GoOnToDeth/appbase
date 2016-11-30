@@ -5,13 +5,13 @@
     android:layout_height="match_parent">
 
     <!--<ImageView-->
-        <!--android:id="@+id/imageview"-->
-        <!--android:layout_width="72dp"-->
-        <!--android:layout_height="72dp"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:background="@drawable/shape_bg"-->
-        <!--android:padding="3dp"-->
-        <!--android:src="@drawable/zm_icon_app" />-->
+    <!--android:id="@+id/imageview"-->
+    <!--android:layout_width="72dp"-->
+    <!--android:layout_height="72dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:background="@drawable/shape_bg"-->
+    <!--android:padding="3dp"-->
+    <!--android:src="@drawable/zm_icon_app" />-->
 
     <com.wzf.baseutils.widget.round.RoundImageView
         android:layout_width="72dp"
@@ -19,7 +19,8 @@
         android:layout_centerInParent="true"
         android:clickable="true"
         android:scaleType="fitXY"
-        app:rv_src="@drawable/zm_icon_app"
+        android:src="@drawable/zm_icon_app"
+        app:rv_cornerRadius="36dp"
         app:rv_srcPress="@drawable/ic_test_p"
         app:rv_strokeColor="#303030"
         app:rv_strokePressColor="#76EE00"

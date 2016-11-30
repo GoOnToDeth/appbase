@@ -40,7 +40,6 @@ public class RoundViewDelegate {
     private BitmapDrawable bdSrc;
     private BitmapDrawable bdSrcPress;
 
-    private int src;
     private int srcPress;
     private int backgroundColor;
     private int backgroundPressColor;
@@ -65,7 +64,6 @@ public class RoundViewDelegate {
 
     private void obtainStyledAttributes(AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.RoundTextView);
-        src = ta.getResourceId(R.styleable.RoundTextView_rv_src, INVALIABLE_VALUE);
         srcPress = ta.getResourceId(R.styleable.RoundTextView_rv_srcPress, INVALIABLE_VALUE);
         backgroundColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundColor, Color.TRANSPARENT);
         backgroundPressColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundPressColor, INVALIABLE_VALUE);
@@ -82,14 +80,6 @@ public class RoundViewDelegate {
         cornerRadius_BR = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BR, 0);
         isRippleEnable = ta.getBoolean(R.styleable.RoundTextView_rv_isRippleEnable, true);
         ta.recycle();
-    }
-
-    public int getSrc() {
-        return src;
-    }
-
-    public void setSrc(int src) {
-        this.src = src;
     }
 
     public int getSrcPress() {
@@ -226,7 +216,8 @@ public class RoundViewDelegate {
     }
 
     public void setBackGroundSelector() {
-//        if (view instanceof ImageView) {
+        if (view instanceof ImageView) {
+            return;
 //            StateListDrawable listDrawable = new StateListDrawable();
 //            Resources resources = view.getResources();
 //            if (src != INVALIABLE_VALUE) {
@@ -239,37 +230,37 @@ public class RoundViewDelegate {
 //            }
 //            if (listDrawable.isStateful())
 //                ((ImageView) view).setImageDrawable(listDrawable);
-//        } else {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isRippleEnable) {
-            setCornerAndStroke(gdBackGround, backgroundColor, strokeColor);
-            RippleDrawable rippleDrawable = new RippleDrawable(getColorStateList(backgroundColor, backgroundPressColor),
-                    gdBackGround, null);
-            view.setBackground(rippleDrawable);
         } else {
-            StateListDrawable bg = new StateListDrawable();
-            setCornerAndStroke(gdBackGround, backgroundColor, strokeColor);
-            bg.addState(new int[]{-android.R.attr.state_pressed}, gdBackGround);
-            if (backgroundPressColor != INVALIABLE_VALUE || strokePressColor != INVALIABLE_VALUE) {
-                setCornerAndStroke(gdPressBackGround,
-                        backgroundPressColor != INVALIABLE_VALUE ? backgroundPressColor : backgroundColor,
-                        strokePressColor != INVALIABLE_VALUE ? strokePressColor : strokeColor);
-                bg.addState(new int[]{android.R.attr.state_pressed}, gdPressBackGround);
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                view.setBackground(bg);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isRippleEnable) {
+                setCornerAndStroke(gdBackGround, backgroundColor, strokeColor);
+                RippleDrawable rippleDrawable = new RippleDrawable(getColorStateList(backgroundColor, backgroundPressColor),
+                        gdBackGround, null);
+                view.setBackground(rippleDrawable);
             } else {
-                view.setBackgroundDrawable(bg);
+                StateListDrawable bg = new StateListDrawable();
+                setCornerAndStroke(gdBackGround, backgroundColor, strokeColor);
+                bg.addState(new int[]{-android.R.attr.state_pressed}, gdBackGround);
+                if (backgroundPressColor != INVALIABLE_VALUE || strokePressColor != INVALIABLE_VALUE) {
+                    setCornerAndStroke(gdPressBackGround,
+                            backgroundPressColor != INVALIABLE_VALUE ? backgroundPressColor : backgroundColor,
+                            strokePressColor != INVALIABLE_VALUE ? strokePressColor : strokeColor);
+                    bg.addState(new int[]{android.R.attr.state_pressed}, gdPressBackGround);
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    view.setBackground(bg);
+                } else {
+                    view.setBackgroundDrawable(bg);
+                }
             }
-        }
-        if (view instanceof TextView && textPressColor != INVALIABLE_VALUE) {
-            ColorStateList textColors = ((TextView) view).getTextColors();
-            int[][] states = new int[][]{new int[]{-android.R.attr.state_pressed}, new int[]{android.R.attr.state_pressed}};
-            ColorStateList colorStateList = new ColorStateList(states, new int[]{textColors.getDefaultColor(), textPressColor});
-            ((TextView) view).setTextColor(colorStateList);
+            if (view instanceof TextView && textPressColor != INVALIABLE_VALUE) {
+                ColorStateList textColors = ((TextView) view).getTextColors();
+                int[][] states = new int[][]{new int[]{-android.R.attr.state_pressed}, new int[]{android.R.attr.state_pressed}};
+                ColorStateList colorStateList = new ColorStateList(states, new int[]{textColors.getDefaultColor(), textPressColor});
+                ((TextView) view).setTextColor(colorStateList);
+            }
         }
     }
-//    }
 
     private void setCornerAndStroke(GradientDrawable gd, int color, int strokeColor) {
         gd.setColor(color);
