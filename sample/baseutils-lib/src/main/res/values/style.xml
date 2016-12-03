@@ -5,4 +5,24 @@
         <item name="android:windowEnterAnimation">@anim/dialog_enter_anim</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
     </style>
+
+    /*QQ切换动画*/
+    <style name="QQActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/qq_activity_new</item>
+        <item name="android:activityOpenExitAnimation">@anim/qq_activity_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/qq_activity_back</item>
+        <item name="android:activityCloseExitAnimation">@anim/qq_activity_finish</item>
+        <item name="android:taskOpenEnterAnimation">@anim/qq_activity_new</item>
+        <item name="android:taskOpenExitAnimation">@anim/qq_activity_out</item>
+        <item name="android:taskCloseEnterAnimation">@anim/qq_activity_back</item>
+        <item name="android:taskCloseExitAnimation">@anim/qq_activity_finish</item>
+    </style>
+
+    /*微信切换动画*/
+    <style name="WeChatActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/wechat_pop_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/wechat_anim_not_change</item>
+        <item name="android:activityCloseEnterAnimation">@anim/wechat_anim_not_change</item>
+        <item name="android:activityCloseExitAnimation">@anim/wechat_pop_out</item>
+    </style>
 </resources>
