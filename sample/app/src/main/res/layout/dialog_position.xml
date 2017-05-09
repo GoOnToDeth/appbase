@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.wzf.baseutils.widget.round.RoundFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:rv_backgroundColor="#CDC673"
+    app:rv_backgroundPressColor="#CDBA96"
+    app:rv_strokeColor="#B22222"
+    app:rv_strokeWidth="2dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="动态控制显示位置，可查看BaseDialog，设置x,y值"
+        android:textColor="@color/txt_color" />
+
+</com.wzf.baseutils.widget.round.RoundFrameLayout>

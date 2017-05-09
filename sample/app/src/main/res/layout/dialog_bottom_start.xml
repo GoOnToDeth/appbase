@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <com.wzf.baseutils.widget.round.RoundTextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="取消"
+            android:textColor="@color/green_normal"
+            app:rv_textPressColor="@color/green_press" />
+
+        <com.wzf.baseutils.widget.round.RoundTextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="完成"
+            android:textColor="@color/green_normal"
+            app:rv_textPressColor="@color/green_press" />
+
+    </RelativeLayout>
+
+    <com.wzf.baseutils.widget.NumberPickerView
+        android:id="@+id/picker"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:contentDescription="test_number_picker_view"
+        app:npv_DividerColor="@color/line_color"
+        app:npv_ItemPaddingHorizontal="5dp"
+        app:npv_ItemPaddingVertical="5dp"
+        app:npv_RespondChangeOnDetached="false"
+        app:npv_ShowCount="5"
+        app:npv_TextColorNormal="#666666"
+        app:npv_TextColorSelected="@color/txt_color"
+        app:npv_TextSizeNormal="14sp"
+        app:npv_TextSizeSelected="18sp"
+        app:npv_WrapSelectorWheel="false" />
+
+</LinearLayout>

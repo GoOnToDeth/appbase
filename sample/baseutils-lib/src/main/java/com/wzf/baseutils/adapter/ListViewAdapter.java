@@ -50,7 +50,7 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
 
     protected abstract void onBindData(ViewHolder viewHolder, int position, T item);
 
-    public void noifyAdapter(List<T> dataSet) {
+    public void notifyAdapter(List<T> dataSet) {
         this.dataSet = dataSet;
         notifyDataSetChanged();
     }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.wzf.baseutils.widget.round.RoundTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="默认文字"
+        android:textColor="#ffffff"
+        app:rv_backgroundColor="#FFA07A"
+        app:rv_backgroundPressColor="#FF7F24"
+        app:rv_cornerRadius="5dp"
+        app:rv_textPressColor="#FF00FF" />
+
+    <com.wzf.baseutils.widget.round.RoundFrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        app:rv_backgroundColor="#CDC673"
+        app:rv_backgroundPressColor="#CDBA96"
+        app:rv_isRadiusHalfHeight="true"
+        app:rv_strokeColor="#B22222"
+        app:rv_strokeWidth="2dp" />
+
+    <com.wzf.baseutils.widget.ToggleButton
+        android:id="@+id/tb_toggle"
+        android:layout_width="40dp"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        app:borderWidth="1px"
+        app:offBorderColor="#EEEEEE"
+        app:offColor="#EEEEEE"
+        app:onColor="#5BD48D"
+        app:spotColor="#ffffff" />
+</LinearLayout>

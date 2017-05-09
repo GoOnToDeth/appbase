@@ -2,6 +2,7 @@ package com.wzf.baseutils.widget.round;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
@@ -68,5 +69,11 @@ public class RoundRelativeLayout extends RelativeLayout {
 
     public RoundViewDelegate getDelegate() {
         return delegate;
+    }
+
+    public void clearSelector() {
+        if (delegate == null) return;
+        delegate.setBackgroundPressColor(Color.TRANSPARENT);
+        delegate.setBackGroundSelector();
     }
 }

@@ -1,6 +1,5 @@
 package com.wzf.baseutils.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -59,6 +58,16 @@ public class PhoneUtils {
     }
 
     /**
+     * 屏幕高度 - 状态栏高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenHeightExceptStatusBar(Context context) {
+        return getScreenHeight(context) - StatusBarUtils.getHeight(context);
+    }
+
+    /**
      * 根据手机分辨率从dp转成px
      *
      * @param dpValue
@@ -70,7 +79,19 @@ public class PhoneUtils {
     }
 
     /**
+     * 从sp到px
+     *
+     * @param spValue
+     * @return
+     */
+    public static int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+    /**
      * 判断系统中是否存在可以启动的相机应用
+     *
      * @param context
      * @return
      */

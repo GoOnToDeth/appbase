@@ -16,7 +16,6 @@ import android.os.Build;
  */
 public class BlurManager {
 
-    private Context context;
     private static BlurProcess mBlurProcess;
 
     public static Bitmap blurByStack(Bitmap original, float radius) {
