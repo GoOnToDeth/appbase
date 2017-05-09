@@ -12,5 +12,4 @@ com.wzf.baseutils.adapter.ListViewAdapter   | 简化的ListView适配器
 com.wzf.baseutils.widget.NumberPickerView   | 滚动选择器(可查看示例StartBottomDialog.java)
 com.wzf.baseutils.ptr.XRecyclerView   | 下拉刷新加载更多的RecyclerView
 
-![](https://github.com/GoOnToDeth/appbase/blob/master/images/S70509-17122665.jpg)
-
+<img src="https://github.com/GoOnToDeth/appbase/blob/master/images/S70509-17122665.jpg" width="360" height="600" />
