@@ -46,6 +46,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     private TextView tvCenter;
     private ImageView ivLeft;
     private View line;
+    private View customTilte;
 
     private int mActionTextColor, mActionTextPressColor;
 
@@ -150,7 +151,11 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         int rightWidth = layoutRight.getVisibility() == GONE ? 0 : layoutRight.getMeasuredWidth();
         int maxWidth = Math.max(leftWidth, rightWidth);
         int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
-        measureChild(layoutCenter, MeasureSpec.makeMeasureSpec(sizeWidth - maxWidth * 2, MeasureSpec.EXACTLY), heightMeasureSpec);
+        if (customTilte == null) {
+            measureChild(layoutCenter, MeasureSpec.makeMeasureSpec(sizeWidth - maxWidth * 2, MeasureSpec.EXACTLY), heightMeasureSpec);
+        } else {
+            measureChild(customTilte, MeasureSpec.makeMeasureSpec(sizeWidth - maxWidth * 2, MeasureSpec.EXACTLY), heightMeasureSpec);
+        }
     }
 
     @Override
@@ -161,14 +166,18 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         int leftWidth = layoutLeft.getVisibility() == GONE ? 0 : layoutLeft.getMeasuredWidth();
         int rightWidth = layoutRight.getVisibility() == GONE ? 0 : layoutRight.getMeasuredWidth();
 
-
         layoutLeft.layout(0, 0, leftWidth, layoutLeft.getMeasuredHeight());
         layoutRight.layout(w - rightWidth, 0, w, layoutRight.getMeasuredHeight());
         line.layout(0, viewHeight, w, h);
         // 设置中间
         int cLeft = leftWidth + (leftWidth > rightWidth ? 0 : rightWidth - leftWidth);
-        int cRight = cLeft + layoutCenter.getMeasuredWidth();
-        layoutCenter.layout(cLeft, 0, cRight, layoutCenter.getMeasuredHeight());
+        if (customTilte == null) {
+            int cRight = cLeft + layoutCenter.getMeasuredWidth();
+            layoutCenter.layout(cLeft, 0, cRight, layoutCenter.getMeasuredHeight());
+        } else {
+            int cRight = cLeft + customTilte.getMeasuredWidth();
+            customTilte.layout(cLeft, 0, cRight, customTilte.getMeasuredHeight());
+        }
     }
 
     private View inflateAction(Action action) {
@@ -178,7 +187,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
             imageView.setImageResource(action.getDrawable());
             imageView.setPadding(10, 10, 10, 10);
             view = imageView;
-        } else {
+        } else if (action instanceof TextAction) {
             RoundTextView textView = new RoundTextView(getContext());
             textView.setPadding(10, 5, 10, 5);
             textView.setGravity(Gravity.CENTER);
@@ -190,8 +199,10 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
                 RoundViewDelegate delegate = textView.getDelegate();
                 delegate.setTextPressColor(mActionTextPressColor);
             }
-
             view = textView;
+        } else {
+            ViewAction viewAction = (ViewAction) action;
+            view = viewAction.getView();
         }
         view.setTag(action);
         view.setOnClickListener(this);
@@ -251,6 +262,29 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         }
     }
 
+    public static abstract class ViewAction implements Action {
+
+        private View mView;
+
+        public ViewAction(View mView) {
+            this.mView = mView;
+        }
+
+        @Override
+        public int getDrawable() {
+            return 0;
+        }
+
+        @Override
+        public String getText() {
+            return "";
+        }
+
+        public View getView() {
+            return mView;
+        }
+    }
+
     public int dip2px(float dpValue) {
         final float scale = getContext().getApplicationContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
@@ -267,8 +301,10 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         LinearLayout.LayoutParams params;
         if (action instanceof ImageAction) {
             params = new LinearLayout.LayoutParams(dip2px(DEFAULT_TITLE_BAR_HEIGHT), LayoutParams.MATCH_PARENT);
-        } else {
+        } else if (action instanceof TextAction) {
             params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        } else {
+            params = new LinearLayout.LayoutParams(dip2px(DEFAULT_TITLE_BAR_HEIGHT), LayoutParams.MATCH_PARENT);
         }
         View view = inflateAction(action);
         layoutRight.addView(view, index, params);
@@ -296,6 +332,17 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
             layoutLeft.setVisibility(VISIBLE);
         else
             layoutLeft.setVisibility(GONE);
+    }
+
+    public void setCustomTilte(View customTilte) {
+        this.customTilte = customTilte;
+        layoutCenter.setVisibility(GONE);
+        if (customTilte.getLayoutParams() == null) {
+            ViewGroup.LayoutParams paramsCenterLayout = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            addView(customTilte, paramsCenterLayout);
+        } else {
+            addView(customTilte);
+        }
     }
 
     public void setOnLeftClickListener(OnClickListener onClickListener) {
