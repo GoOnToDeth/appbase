@@ -30,15 +30,15 @@ import com.wzf.baseutils.widget.round.RoundViewDelegate;
 
 public class TitleBar extends ViewGroup implements View.OnClickListener {
 
-    private static final int DEFAULT_MAIN_TEXT_SIZE = 18;
+    private static final int DEFAULT_MAIN_TEXT_SIZE = 16;
     private static final int DEFAULT_SUB_TEXT_SIZE = 12;
     private static final int DEFAULT_ACTION_TEXT_SIZE = 15;
     private static final int DEFAULT_TITLE_BAR_HEIGHT = 48;
     private static final int DEFAULT_LINE_HEIGHT = 0;
 
-    private int DEFAULT_TITLE_COLOR = Color.parseColor("#F0FBF4");
-    private int DEFAULT_DIVIDER_COLOR = Color.parseColor("#FFd2d2d2");
-    private int DEFAULT_BACKGROUND = Color.parseColor("#5BD48D");
+    private int DEFAULT_TITLE_COLOR = Color.parseColor("#808080");
+    private int DEFAULT_DIVIDER_COLOR = Color.parseColor("#B2B2B2");
+    private int DEFAULT_BACKGROUND = Color.parseColor("#F9F9F9");
 
     private int DEFAULT_TITLE_BAR_WIDTH;
 
@@ -87,11 +87,11 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         ivLeft.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         ivLeft.setImageResource(ivLeftRes);
         LinearLayout.LayoutParams paramsLeftImage = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        int leftIvPadding = dip2px(15);
+        int leftIvPadding = dip2px(10);
         ivLeft.setPadding(leftIvPadding, leftIvPadding, leftIvPadding, leftIvPadding);
         layoutLeft.addView(ivLeft, paramsLeftImage);
 
-        ViewGroup.LayoutParams paramsLeftLayout = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        LayoutParams paramsLeftLayout = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         layoutLeft.setGravity(Gravity.CENTER);
         addView(layoutLeft, paramsLeftLayout);
 
@@ -102,23 +102,23 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         tvCenter.setTextSize(DEFAULT_MAIN_TEXT_SIZE);
         tvCenter.setGravity(Gravity.CENTER);
         tvCenter.setSingleLine(true);
-        ViewGroup.LayoutParams paramsCenterTv = new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        LayoutParams paramsCenterTv = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         layoutCenter.addView(tvCenter, paramsCenterTv);
 
-        ViewGroup.LayoutParams paramsCenterLayout = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        LayoutParams paramsCenterLayout = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         layoutCenter.setGravity(Gravity.CENTER);
         addView(layoutCenter, paramsCenterLayout);
 
         // 右边
         layoutRight = new LinearLayout(getContext());
         layoutRight.setGravity(Gravity.CENTER_VERTICAL);
-        ViewGroup.LayoutParams paramsRightLayout = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        LayoutParams paramsRightLayout = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         addView(layoutRight, paramsRightLayout);
 
         // 底部的线
         line = new View(getContext());
         line.setBackgroundColor(DEFAULT_DIVIDER_COLOR);
-        ViewGroup.LayoutParams paramsDivider = new LayoutParams(LayoutParams.MATCH_PARENT, DEFAULT_LINE_HEIGHT);
+        LayoutParams paramsDivider = new LayoutParams(LayoutParams.MATCH_PARENT, DEFAULT_LINE_HEIGHT);
         addView(line, paramsDivider);
     }
 
@@ -187,7 +187,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
             imageView.setImageResource(action.getDrawable());
             imageView.setPadding(10, 10, 10, 10);
             view = imageView;
-        } else if (action instanceof TextAction) {
+        } else {
             RoundTextView textView = new RoundTextView(getContext());
             textView.setPadding(10, 5, 10, 5);
             textView.setGravity(Gravity.CENTER);
@@ -199,10 +199,8 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
                 RoundViewDelegate delegate = textView.getDelegate();
                 delegate.setTextPressColor(mActionTextPressColor);
             }
+
             view = textView;
-        } else {
-            ViewAction viewAction = (ViewAction) action;
-            view = viewAction.getView();
         }
         view.setTag(action);
         view.setOnClickListener(this);
@@ -262,29 +260,6 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         }
     }
 
-    public static abstract class ViewAction implements Action {
-
-        private View mView;
-
-        public ViewAction(View mView) {
-            this.mView = mView;
-        }
-
-        @Override
-        public int getDrawable() {
-            return 0;
-        }
-
-        @Override
-        public String getText() {
-            return "";
-        }
-
-        public View getView() {
-            return mView;
-        }
-    }
-
     public int dip2px(float dpValue) {
         final float scale = getContext().getApplicationContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
@@ -301,10 +276,8 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         LinearLayout.LayoutParams params;
         if (action instanceof ImageAction) {
             params = new LinearLayout.LayoutParams(dip2px(DEFAULT_TITLE_BAR_HEIGHT), LayoutParams.MATCH_PARENT);
-        } else if (action instanceof TextAction) {
-            params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         } else {
-            params = new LinearLayout.LayoutParams(dip2px(DEFAULT_TITLE_BAR_HEIGHT), LayoutParams.MATCH_PARENT);
+            params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         }
         View view = inflateAction(action);
         layoutRight.addView(view, index, params);
@@ -338,7 +311,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         this.customTilte = customTilte;
         layoutCenter.setVisibility(GONE);
         if (customTilte.getLayoutParams() == null) {
-            ViewGroup.LayoutParams paramsCenterLayout = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            LayoutParams paramsCenterLayout = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             addView(customTilte, paramsCenterLayout);
         } else {
             addView(customTilte);

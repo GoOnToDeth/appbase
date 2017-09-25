@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Banner高宽比,范围0-1,默认0.5(for LoopViewPager)-->
+    <attr name="bb_scale" format="float"/>
+    <!-- 是否支持循环,默认true-->
+    <attr name="bb_isLoopEnable" format="boolean"/>
+    <!-- 滚动延时,默认3000毫秒-->
+    <attr name="bb_delay" format="integer"/>
+    <!-- 滚动间隔,默认3000毫秒-->
+    <attr name="bb_period" format="integer"/>
+    <!-- 是否支持自动滚动,默认true-->
+    <attr name="bb_isAutoScrollEnable" format="boolean"/>
+
+    <declare-styleable name="BaseBanner">
+        <attr name="bb_scale"/>
+        <attr name="bb_isLoopEnable"/>
+        <attr name="bb_delay"/>
+        <attr name="bb_period"/>
+        <attr name="bb_isAutoScrollEnable"/>
+    </declare-styleable>
+</resources>

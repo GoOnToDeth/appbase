@@ -30,7 +30,7 @@ import java.util.Arrays;
 public class MainFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private static final String[] items = {"RoundView和开关按钮", "流式布局", "下拉刷新和加载更多",
-            "自定义Dialog", "高斯模糊"};
+            "自定义Dialog", "高斯模糊", "Banner"};
 
     @Nullable
     @Override
@@ -59,15 +59,16 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
                 routeFragment(new FlowFragment());
                 break;
             case 2:
-                new AlertDialog.Builder(getActivity())
-                        .setMessage("请查看：https://github.com/GoOnToDeth/XRecyclerView_Zf")
-                        .show();
+                routeFragment(new PtrFragment());
                 break;
             case 3:
                 routeFragment(new DialogFragment());
                 break;
             case 4:
                 routeFragment(new BlurFragment());
+                break;
+            case 5:
+                routeFragment(new BannerFragment());
                 break;
         }
     }
