@@ -34,3 +34,12 @@ BaseBanner   | 广告栏
 * 广告栏Banner
 
 ![](https://github.com/GoOnToDeth/appbase/blob/master/images/banner.gif)
+
+具体实例可以查看Demo。
+
+
+# 联系方式和问题建议
+ 
+ E-mail: wangzf0342@qq.com
+ 
+ Blog: http://blog.csdn.net/coder_giser
