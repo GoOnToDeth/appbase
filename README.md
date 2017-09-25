@@ -1,6 +1,13 @@
 # appbase
 常用工具库
 
+## apk下载
+* [下载地址](https://raw.githubusercontent.com/GoOnToDeth/appbase/master/sample/appbase_demo.apk) 
+* 二维码下载
+
+![](https://github.com/GoOnToDeth/appbase/blob/master/images/qrcode.png)
+
+## 简介
 Package | Function 
 ------- | :----------------
 com.wzf.baseutils.blur  | 高斯模糊
