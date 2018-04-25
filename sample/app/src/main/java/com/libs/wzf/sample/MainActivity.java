@@ -13,6 +13,7 @@ import com.wzf.baseutils.adapter.ListViewAdapter;
 import com.wzf.baseutils.adapter.ViewHolder;
 
 import java.util.Arrays;
+import java.util.concurrent.locks.LockSupport;
 
 public class MainActivity extends AppCompatActivity {
 

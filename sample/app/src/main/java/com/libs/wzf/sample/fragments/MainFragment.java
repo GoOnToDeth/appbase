@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +28,8 @@ import java.util.Arrays;
  */
 public class MainFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    private static final String[] items = {"RoundView和开关按钮", "流式布局", "下拉刷新和加载更多",
-            "自定义Dialog", "高斯模糊", "Banner"};
+    private static final String[] items = {"RoundView和开关按钮", "流式布局", "无边框二维码",
+            "自定义Dialog", "高斯模糊", "Banner", "可点击的环形统计图"};
 
     @Nullable
     @Override
@@ -59,7 +58,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
                 routeFragment(new FlowFragment());
                 break;
             case 2:
-                routeFragment(new PtrFragment());
+                routeFragment(new QRCodeFragment());
                 break;
             case 3:
                 routeFragment(new DialogFragment());
@@ -69,6 +68,9 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
                 break;
             case 5:
                 routeFragment(new BannerFragment());
+                break;
+            case 6:
+                routeFragment(new CircleChartFragment());
                 break;
         }
     }
