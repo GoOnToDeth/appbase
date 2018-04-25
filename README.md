@@ -20,9 +20,6 @@ NumberPickerView   | 滚动选择器(可查看示例StartBottomDialog.java)
 BaseBanner   | 广告栏
 QRCodeWriter   | 无边框二维码
 
-<img src="https://github.com/GoOnToDeth/appbase/blob/master/images/home.png" />
-
-
 ## 部分效果图
 * 流式布局FlowView
 
