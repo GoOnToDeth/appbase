@@ -19,6 +19,7 @@ ListViewAdapter   | 简化的ListView适配器
 NumberPickerView   | 滚动选择器(可查看示例StartBottomDialog.java)
 BaseBanner   | 广告栏
 QRCodeWriter   | 无边框二维码
+RegionView   | 可点击的环形图
 
 ## 部分效果图
 * 流式布局FlowView
@@ -32,6 +33,14 @@ QRCodeWriter   | 无边框二维码
 * 广告栏Banner
 
 ![](https://github.com/GoOnToDeth/appbase/blob/master/images/banner.gif)
+
+* 二维码
+
+![](https://github.com/GoOnToDeth/appbase/blob/master/images/frame_qrcode.gif)
+
+* 点击环形图
+
+![](https://github.com/GoOnToDeth/appbase/blob/master/images/chart_circle.gif)
 
 具体实例可以查看Demo。
 
